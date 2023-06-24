@@ -10,7 +10,7 @@ public class DiscreteDistribution {
         int iM = Integer.parseInt(args[0]);
         int iR;
         int[] iA = new int[args.length - 1];
-        int[] iS = new int[iA.length + 1];
+        int[] iS = new int[iA.length];
 
         // System.out.println(args.length);
 
@@ -21,10 +21,10 @@ public class DiscreteDistribution {
         
         // System.out.println();
 
-        iS[0] = 0;
+        iS[0] = iA[0];
         // System.out.print(iS[0] + " ");
         for (int i = 1; i < iS.length; i++) {
-            iS[i] = iS[i - 1] + iA[i - 1];
+            iS[i] = iS[i - 1] + iA[i];
             // System.out.print(iS[i] + " ");
         }
 
