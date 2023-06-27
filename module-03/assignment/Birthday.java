@@ -11,8 +11,8 @@ public class Birthday {
         iDupBirthday holds the amount of n random people that entered the room that have a 
         duplicate birthday
         */
-        int[] iDupBirthday = new int[iN];
-        int[] iEnteredRoom = new int[iN];
+        int[] iDupBirthday = new int[iN + 1];
+        int[] iEnteredRoom = new int[iN + 1];
         int iTrialsCounter = 0;
         boolean bIsDupBirthday; 
 

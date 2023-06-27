@@ -14,7 +14,7 @@ public class ThueMorse {
             iPrevSeqMultiplier = iSeqMultiplier;
             iSeqMultiplier *= 2;
 
-            for (int i = iPrevSeqMultiplier; i < iSeqMultiplier && i < iThueMorseSeq.length; i++ ) {
+            for (int i = iPrevSeqMultiplier; i < iSeqMultiplier && i < iThueMorseSeq.length; i++) {
                 iThueMorseSeq[i] = (iThueMorseSeq[i - iPrevSeqMultiplier] + 1) % 2;
             }
         }
