@@ -1,4 +1,4 @@
-public class DiscreteDistribution {
+ public class DiscreteDistribution {
     /*
      * Description: The program DiscreDistribution.java takes an integer 
      * command-line argument m, followed by a sweuqence of positive integer 
