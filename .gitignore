@@ -49,3 +49,6 @@ module-04/advanced/DistinctInteger.java
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Mac Specific
+.DS_Store
