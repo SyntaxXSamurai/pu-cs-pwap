@@ -28,10 +28,10 @@ public class Histogram {
       System.out.println();
       
       // System.out.println(iReturnArray.length);
-      int iArraySum = 0;
+      // int iArraySum = 0;
       for (int i = 0; i < iReturnArray.length; i++) {
          System.out.println("Index = " + i + ", Frequence = " + iReturnArray[i]);
-         iArraySum += iReturnArray[i];
+         // iArraySum += iReturnArray[i];
       }
       System.out.println();
       
