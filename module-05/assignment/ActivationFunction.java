@@ -6,27 +6,43 @@
 public class ActivationFunction {
     // Returns the Heaviside function of x.
     public static double heaviside(double dX) {
-        double dH = 0.0;
-        if (dX < 0) {
-            dH = 0.0;
-        } else if (dX == 0) {
-            dH = 0.5;
+        if (Double.isNaN(dX)) {
+            return Double.NaN; 
         } else {
-            dH = 1.0;
-        }
+            double dH = 0.0;
+            if (dX < 0) {
+                dH = 0.0;
+            } else if (dX == 0) {
+                dH = 0.5;
+            } else {
+                dH = 1.0;
+            }
 
-        return dH; 
+            return dH;
+        } 
     }
 
     // Returns the sigmoid function of x.
     public static double sigmoid(double dX) {
-        double dSigmoid = 1 / (1 + Math.exp(-dX));
+        if (Double.isNaN(dX)) {
+            return Double.NaN; 
+        } else {
+            double dSigmoid = 1 / (1 + Math.exp(-dX));
 
-        return dSigmoid;
+            return dSigmoid;
+        } 
     }
 
     // Returns the hyperbolic tangent of x.
     public static double tanh(double dX) {
+        if (Double.isNaN(dX)) {
+            return Double.NaN; 
+        } else if (dX >= 20) {
+            return 1.0;
+        } else if (dX <= -20) {
+            return -1.0;
+        }
+        
         double dTanh = (Math.exp(dX) - Math.exp(-dX)) / (Math.exp(dX) + Math.exp(-dX));
 
         return dTanh;
@@ -34,33 +50,45 @@ public class ActivationFunction {
 
     // Returns the softsign function of x.
     public static double softsign(double dX) {
+        if (Double.isNaN(dX)) {
+            return Double.NaN; 
+        } else if (dX == Double.POSITIVE_INFINITY) {
+            return 1.0;
+        } else if (dX == Double.NEGATIVE_INFINITY) {
+            return -1.0;
+        }   
+
         double dF = dX / (1 + Math.abs(dX));
 
-        return dF; 
+        return dF;
     }
 
     // Returns the square nonlinearity function of x.
     public static double sqnl(double dX) {
-        double dSQNL = 0.0; 
-        
-        if (dX <= -2) {
-            dSQNL = -1.0; 
-        } else if (-2 < dX && dX < 0) {
-            dSQNL = dX + (Math.pow(dX, 2) / 4);
-        } else if (0 <= dX && dX < 2) {
-            dSQNL = dX - (Math.pow(dX, 2) / 4);
+        if (Double.isNaN(dX)) {
+            return Double.NaN; 
         } else {
-            dSQNL = 1; 
-        }
+            double dSQNL = 0.0; 
+            
+            if (dX <= -2) {
+                dSQNL = -1.0; 
+            } else if (-2 < dX && dX < 0) {
+                dSQNL = dX + (Math.pow(dX, 2) / 4);
+            } else if (0 <= dX && dX < 2) {
+                dSQNL = dX - (Math.pow(dX, 2) / 4);
+            } else {
+                dSQNL = 1; 
+            }
 
-        return dSQNL;
+            return dSQNL;
+        }   
     }
 
     // Takes a double command-line argument x and prints each activation
     // function, evaluated, in the format (and order) given below.
     public static void main(String[] args) {
         double dX = Double.parseDouble(args[0]);
-
+        
         StdOut.printf("%1$17s %2$s\n", "heaviside(" + dX + ") = ", heaviside(dX));
         StdOut.printf("%1$17s %2$s\n", "sigmoid(" + dX + ") = ", sigmoid(dX));
         StdOut.printf("%1$17s %2$s\n", "tanh(" + dX + ") = ", tanh(dX));

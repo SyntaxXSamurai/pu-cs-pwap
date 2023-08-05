@@ -4,29 +4,32 @@
 public class Divisors {
     // Returns the greatest common divisor of a and b.
     public static int gcd(int iA, int iB) {
+        if (iA == 0 && iB == 0) {
+            return 0; 
+        }
+
         iA = Math.abs(iA);
         iB = Math.abs(iB);
-        int iPrevNum = iA;
+        int iGCD = iA;
 
         while (iB != 0) {
-            if (iB != 0) {
-                iA = iB;
-                iB = iPrevNum % iB;
-                
-                if (iB != 0) {
-                    iPrevNum = iA;
-                }
-                // StdOut.println(iA + " " + iB + " " + iPrevNum);
-            } 
+            iGCD = iB;
+            iB = iA % iB;
+            iA = iGCD;
+            // StdOut.println(iA + " " + iB + " " + iPrevNum);
         }
         
-        return iA;
+        return iGCD;
     }
 
     // Returns the least common multiple of a and b.
     public static int lcm(int iA, int iB) {
+        if (iA == 0 || iB == 0) {
+            return 0;
+        }
+
         int iLCM = 0;
-        iLCM = (Math.abs(iA) * Math.abs(iB)) / gcd(iA, iB);
+        iLCM = (Math.abs(iA) / gcd(iA, iB)) * Math.abs(iB);
 
         return iLCM;
     }
@@ -46,7 +49,7 @@ public class Divisors {
     public static int totient(int iN) {
         int iIsPrime = 0;
         for (int i = 1; i <= iN; i++) {
-            if (areRelativelyPrime(i, iN) == true) {
+            if (areRelativelyPrime(i, iN)) {
                 iIsPrime++;    
             }
         }
@@ -61,8 +64,8 @@ public class Divisors {
         int iB = Integer.parseInt(args[1]);
 
         StdOut.println("gcd(" + iA + ", " + iB + ") = " + gcd(iA, iB));
-        StdOut.println("lcm(" + iA + ", " + iB + ") = " + lcm(iA, iB));
-        StdOut.println("areRElatielyPrime(" + iA + ", " + iB + ") = " + areRelativelyPrime(iA, iB));
+        StdOut.println("lcm(" + iA + ", " + iB + ") = " + lcm(iA, iB)); 
+        StdOut.println("areRelativelyPrime(" + iA + ", " + iB + ") = " + areRelativelyPrime(iA, iB));
         StdOut.println("totient(" + iA + ") = " + totient(iA));
         StdOut.println("totient(" + iB + ") = " + totient(iB));
     }

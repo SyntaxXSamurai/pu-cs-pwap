@@ -5,16 +5,24 @@
  * audio effects by manipulating such arrays.
  */
 public class AudioCollage {
+    private static double[] check(double[] a) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] < -1.0) {
+                a[i] = -1.0;
+            } else if (a[i] > 1.0) {
+                a[i] = 1.0;
+            }
+        }
+
+        return a; 
+    }
+
     // Returns a new array that rescales a[] by a multiplicative factor of alpha.
     public static double[] amplify(double[] a, double alpha) {
         double[] dNewSound = new double[a.length];
 
         for (int i = 0; i < a.length; i++) {
-            if (alpha > 1) {
-                dNewSound[i] = a[i] * alpha; 
-            } else if (0 < alpha && alpha < 1) {
-                dNewSound[i] = a[i] / alpha; 
-            }
+            dNewSound[i] = a[i] * alpha;
         }
 
         return dNewSound;
@@ -27,7 +35,7 @@ public class AudioCollage {
 
         for (int i = a.length - 1; i >= 0; i--) {
             dNewSound[iFirstIndex] = a[i];
-            iFirstIndex++; 
+            iFirstIndex++;
         }
 
         return dNewSound;
@@ -99,20 +107,22 @@ public class AudioCollage {
     // Creates an audio collage and plays it on standard audio.
     // See below for the requirements.
     public static void main(String[] args) {
-        double[] dFirstSound = StdAudio.read("./functions/singer.wav");
-        double[] dSecondSound = StdAudio.read("./functions/chimes.wav");
-        double dAlpha = StdIn.readDouble();
-
-        StdOut.println("Amplify");
-        StdAudio.play(amplify(dFirstSound, dAlpha));
-        StdOut.println("Reverse");
-        StdAudio.play(reverse(dFirstSound));
-        StdOut.println("Merge");
-        StdAudio.play(merge(dFirstSound, dSecondSound));
-        StdOut.println("Mix");
-        StdAudio.play(mix(dFirstSound, dSecondSound ));
-        StdOut.println("Change Speed");
-        StdAudio.play(changeSpeed(dFirstSound, dAlpha));
-
+        double[] dFirstSound = StdAudio.read("./singer.wav");
+        double[] dSecondSound = StdAudio.read("./chimes.wav");
+        double[] dThirdSound = StdAudio.read("./beatbox.wav");
+        double[] dFourthSound = StdAudio.read("./piano.wav");
+        double[] dFifthSound = StdAudio.read("./buzzer.wav");
+        double dAlpha = 2.0;
+        
+        // StdOut.println("Amplify");
+        StdAudio.play(check(amplify(dFirstSound, dAlpha)));
+        // StdOut.println("Reverse");
+        StdAudio.play(check(reverse(dSecondSound)));
+        // StdOut.println("Merge");
+        StdAudio.play(check(merge(dThirdSound, dFirstSound)));
+        // StdOut.println("Mix");
+        StdAudio.play(check(mix(dFourthSound, dFirstSound)));
+        // StdOut.println("Change Speed");
+        StdAudio.play(check(changeSpeed(dFifthSound, dAlpha)));
     }
 }
