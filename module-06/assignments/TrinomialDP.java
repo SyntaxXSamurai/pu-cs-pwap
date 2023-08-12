@@ -11,31 +11,54 @@ public class TrinomialDP {
             return 0; 
         }
 
-        long[][] lTrinomialCoefficient = new long[iN + 1][iN + 1];
-        lTrinomialCoefficient[0][0] = 1;
-        for (int i = 1; i <= iN; i++) {
-            for (int j = 0; j <= i; j++) {
-                if (j == 0) {
-                    lTrinomialCoefficient[i][j] = lTrinomialCoefficient[i - 1][j];
-                } else if (i == j) {
-                    lTrinomialCoefficient[i][j] = lTrinomialCoefficient[i - 1][j - 1];
+        long[][] lTrinomialCoefficient = new long[iN + 1][2 * iN + 1]; 
+        int iMiddle = iN; 
+        lTrinomialCoefficient[0][iMiddle] = 1;
+        for (int i = 1; i < lTrinomialCoefficient.length; i++) {
+            lTrinomialCoefficient[i][iMiddle] = 
+                    lTrinomialCoefficient[i - 1][iMiddle - 1] + 
+                    lTrinomialCoefficient[i - 1][iMiddle] + 
+                    lTrinomialCoefficient[i - 1][iMiddle + 1];
+
+            for (int j = 0; j < i; j++) {
+                if (j == i - 1) {
+                    lTrinomialCoefficient[i][iMiddle - i] = 1;
+                    lTrinomialCoefficient[i][iMiddle + i] = 1; 
                 } else {
-                    lTrinomialCoefficient[i][j] = 
-                        lTrinomialCoefficient[i - 1][j - 1] + 
-                        lTrinomialCoefficient[i - 1][j] + 
-                        lTrinomialCoefficient[i - 1][j + 1]; 
+                    lTrinomialCoefficient[i][iMiddle - j - 1] = 
+                            lTrinomialCoefficient[i - 1][iMiddle - j - 2] + 
+                            lTrinomialCoefficient[i - 1][iMiddle - j - 1] + 
+                            lTrinomialCoefficient[i - 1][iMiddle - j];
+                    
+                    lTrinomialCoefficient[i][iMiddle + j + 1] = 
+                            lTrinomialCoefficient[i - 1][iMiddle + j + 2] + 
+                            lTrinomialCoefficient[i - 1][iMiddle + j + 1] + 
+                            lTrinomialCoefficient[i - 1][iMiddle + j];
                 }
             }
         }
 
-        return lTrinomialCoefficient[iN][iK];
+        /*
+        for (int i = 0; i < lTrinomialCoefficient.length; i++) {
+            for (int j = 0; j < lTrinomialCoefficient[0].length; j++) {
+                if (lTrinomialCoefficient[i][j] != 0) {
+                StdOut.print(lTrinomialCoefficient[i][j] + " ");
+                } else {
+                    StdOut.print("  ");
+                }
+            }
+            StdOut.println();
+        } 
+        */
+        
+        return lTrinomialCoefficient[iN][iN + iK];
     }
-
     // Takes two integer command-line arguments n and k and prints T(n, k).
     public static void main(String[] args) {
         int iN = Integer.parseInt(args[0]);
         int iK = Integer.parseInt(args[1]);
 
+        // trinomial(iN, iK);
         StdOut.println(trinomial(iN, iK));   
     }
 }
