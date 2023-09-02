@@ -37,19 +37,6 @@ public class TrinomialDP {
                 }
             }
         }
-
-        /*
-        for (int i = 0; i < lTrinomialCoefficient.length; i++) {
-            for (int j = 0; j < lTrinomialCoefficient[0].length; j++) {
-                if (lTrinomialCoefficient[i][j] != 0) {
-                StdOut.print(lTrinomialCoefficient[i][j] + " ");
-                } else {
-                    StdOut.print("  ");
-                }
-            }
-            StdOut.println();
-        } 
-        */
         
         return lTrinomialCoefficient[iN][iN + iK];
     }
