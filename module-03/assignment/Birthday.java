@@ -37,7 +37,7 @@ public class Birthday {
         for (int i = 0; i < iDupBirthday.length && dFraction < 0.5; i++) {
             iRunningTotal += iDupBirthday[i];
             dFraction = (double) iRunningTotal / iTrials;
-            System.out.println(i + 1 + "\t" + iRunningTotal + "\t" + dFraction);
+            System.out.println(i + 1 + "\t" + iDupBirthday[i] + "\t" + dFraction);
         }
     }
 }
